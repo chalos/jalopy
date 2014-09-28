@@ -1,208 +1,253 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.notzippy</groupId>
-	<artifactId>jalopy2-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <!-- Project information -->
+    <name>Jalopy</name>
+    <groupId>com.lukespragg</groupId>
+    <artifactId>jalopy</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <inceptionYear>2001</inceptionYear>
+    <url>https://github.com/lukespragg/jalopy</url>
+    <description>A source code formatter/beautifier/pretty printer for the Java programming language. It is aimed to provide a full-featured, yet free alternative to the well-known Jindent. Plug-ins for Ant, Eclipse, IDEA, JBuilder, JDeveloper, jEdit, NetBeans.</description>
 
-	<distributionManagement>
-		<repository>
-			<id>nexus-site</id>
-			<url>http://central_nexus/server</url>
-		</repository>
-		<site>
-			<id>jalopy.website</id>
-			<name>Jalopy Website</name>
-			<url>file://${basedir}/../JALOPY2-SITE</url>
-		</site>
-	</distributionManagement>
-	<name>jalopy2</name>
-	<url>http://maven.apache.org</url>
+    <!-- Parent information -->
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
 
+    <!-- Build properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <buildNumber>0</buildNumber>
+        <ciSystem>unknown</ciSystem>
+        <commit>unknown</commit>
+    </properties>
+
+    <!-- License information -->
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://tldrlegal.com/l/bsd3</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Project developers -->
+    <developers>
+        <developer>
+            <id>Wulfspider</id>
+            <name>Luke Spragg</name>
+            <email>the@wulf.im</email>
+        </developer>
+    </developers>
+
+    <!-- Source code access -->
     <scm>
-        <connection>scm:git:git://github.com/notzippy/JALOPY2-MAIN.git</connection>
-        <developerConnection>scm:git:git@github.com:notzippy/JALOPY2-MAIN.git</developerConnection>
-        <url>http://github.com/notzippy/JALOPY2-MAIN/tree/master</url>
+        <connection>scm:git:git://github.com/lukespragg/jalopy.git</connection>
+        <developerConnection>scm:git:git@github.com:lukespragg/jalopy.git</developerConnection>
+        <url>https://github.com/lukespragg/jalopy</url>
     </scm>
 
-	<properties>
-		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <!-- Continuous integration -->
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/lukespragg/jalopy</url>
+    </ciManagement>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>antlr-maven-plugin</artifactId>
-			<version>2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.4</version>
-		</dependency>
+    <!-- Issue management -->
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/lukespragg/jalopy/issues</url>
+    </issueManagement>
 
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.14-SNAPSHOT</version>
-				<executions>
-					<!-- -->
-					<execution>
-						<id>documentation identifier</id>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>generate-xhtml</goal>
-							<!-- <goal>generate-pdf</goal> <goal>generate-...</goal> <goal>generate-pdf</goal> -->
-						</goals>
-						<configuration>
-							<!-- per execution configuration -->
-							<includes>**/*-docbkx.xml</includes>
-							<draftMode>false</draftMode>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.docbook</groupId>
-						<artifactId>docbook-xml</artifactId>
-						<version>5.0-all</version>
-						<classifier>resources</classifier>
-						<type>zip</type>
-						<scope>runtime</scope>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<!-- shared configuration -->
-					<targetDirectory>target/site/</targetDirectory>
-					<xincludeSupported>true</xincludeSupported>
-					<paperType>A4</paperType>
-					<fop1Extensions>1</fop1Extensions>
-					<chunkedOutput>true</chunkedOutput>
-					<xhtmlCustomization>src/docbkx/manual/manual.src.xsl</xhtmlCustomization>
-					<customizationParameters>
-						<!-- additional XSLT parameters -->
-						<parameter>
-							<name>build.time</name>
-							<value>${maven.build.timestamp}</value>
-						</parameter>
-						<parameter>
-							<name>version</name>
-							<value>${project.version}</value>
-						</parameter>
-					</customizationParameters>
-				</configuration>
-			</plugin>
+    <!-- Dependency repositories -->
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-releases</id>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>antlr-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<!-- By default, grammar files are in ${basedir}/src/main/antlr -->
-					<grammarDefs>
-						<grammar>
-							<name>common.g</name>
-						</grammar>
-						<grammar>
-							<name>java15.g</name>
-						</grammar>
-						<grammar>
-							<name>java.doc.g</name>
-						</grammar>
-					</grammarDefs>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<!-- generate is the correct goal -->
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.0</version>
-					<configuration>
-						<reportPlugins>
-							<plugin>
-								<groupId>org.apache.maven.plugins</groupId>
-								<artifactId>maven-project-info-reports-plugin</artifactId>
-								<version>2.4</version>
-								<configuration>
-									<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-									<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-								</configuration>
-								<!-- simpler configuration without reportSets available for usual 
-									cases -->
-								<reports>
-                  <report>index</report> 
-									<report>dependencies</report>
-                  <report>summary</report> 
-									<report>scm</report>
-								</reports>
-							</plugin>
-							<plugin>
-								<groupId>org.apache.maven.plugins</groupId>
-								<artifactId>maven-javadoc-plugin</artifactId>
-								<version>2.8</version>
-							</plugin>
-						</reportPlugins>
-					</configuration>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>
-											antlr-maven-plugin
-										</artifactId>
-										<versionRange>[2.2,)</versionRange>
-										<goals>
-											<goal>generate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+    <!-- Build plugin repositories -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-releases</id>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
-	</build>
-	<description>This project is based on the original project at jalopy.sourceforge.com</description>
+    <!-- Project dependencies -->
+    <dependencies>
+        <!-- Transitive -->
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>antlr-maven-plugin</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <!-- Testing only -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build configuration -->
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+
+        <!-- Build plugins -->
+        <plugins>
+            <!-- License header plugin -->
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.10.b1</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <properties>
+                                <project>${project.name}</project>
+                                <year>${project.inceptionYear}</year>
+                                <name>${project.organization.name}</name>
+                                <url>${project.organization.url}</url>
+                            </properties>
+                            <quiet>true</quiet>
+                            <encoding>UTF-8</encoding>
+                            <strictCheck>true</strictCheck>
+                            <header>HEADER.txt</header>
+                            <mapping>
+                                <java>SLASHSTAR_STYLE</java>
+                            </mapping>
+                            <keywords>
+                                <keyword>${project.name}</keyword>
+                                <keyword>license</keyword>
+                            </keywords>
+                            <includes>
+                                <include>src/main/java/**</include>
+                                <include>src/test/java/**</include>
+                            </includes>
+                        </configuration>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Source compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerArguments>
+                        <O>-Xlint:all</O>
+                        <O>-Xlint:-path</O>
+                    </compilerArguments>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <!-- JAR creation plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Specification-Title>${project.name}</Specification-Title>
+                            <Specification-Version>${project.version}+${ciSystem}-b${buildNumber}.git-${commit}</Specification-Version>
+                            <Specification-Vendor>${project.organization.name} - ${project.organization.url}</Specification-Vendor>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- Parser generator plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>antlr-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <grammarDefs>
+                                <grammar>
+                                    <name>common.g</name>
+                                </grammar>
+                                <grammar>
+                                    <name>java15.g</name>
+                                </grammar>
+                                <grammar>
+                                    <name>java.doc.g</name>
+                                </grammar>
+                            </grammarDefs>
+                        </configuration>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Javadoc creation plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <author>false</author>
+                    <version>false</version>
+                </configuration>
+            </plugin>
+            <!-- Coveralls reporting plugin  -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>2.2.0</version>
+            </plugin>
+            <!-- Cobertura test coverage plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <format>xml</format>
+                    <maxmem>256m</maxmem>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,23 +1,31 @@
-# Source language and JDK version to use.
+# Source language and JDK version to use
 language: java
 jdk: oraclejdk7
 
-# Compile and package JAR and set build properties.
-install: mvn package -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7}
-after_success:
-  # Get files for use with build, namely the custom Maven settings.xml.
-  - "git clone https://github.com/SpoutDev/travis-ci-resources.git target/travis"
-  # Check if commit s not a pull request, if git repo is official, and if branch is master. If checks pass, deploy artifacts to Maven repository.
-  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == SpoutDev/Jalopy ]] && [[ $TRAVIS_BRANCH == master ]] && mvn deploy --settings target/travis/settings.xml"
+# Compile and package JAR and set build properties
+install: mvn dependency:go-offline
+script: mvn package -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7}
 
+# Perform steps after compilation/test success
+after_success:
+  # Get files for use with build, namely the custom Maven settings.xml
+  - "git clone https://github.com/lukespragg/travis-ci-resources.git target/travis"
+  # Check if commit is not a pull request, if repo is official, and branch is master, generate and deploy artifacts and reports
+  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == lukespragg/jalopy ]] && [[ $TRAVIS_BRANCH == master ]] && mvn javadoc:jar source:jar cobertura:cobertura coveralls:cobertura -DserviceJobId=$TRAVIS_JOB_ID deploy --settings target/travis/settings.xml"
+
+# Notification services
 notifications:
-  # Disable build status email notifications, until the issue with forks is fixed.
+  # Disable build status email notifications, until the issue with forks is fixed
   email: false
   webhooks:
-    # Send build information and status to Notifico.
-    - http://n.tkte.ch/h/1159/RsOhO5R3V-80Lqqu0KX9ubPX
+    # Send build information and status to Notifico
+    - 
 
+# Environmental system variables
 env:
   global:
-    - secure: "bgjwic0j1OYArJOWTq8FeDIhsMLIoW83U6OQikXD5K7L8DLv4eZ8d5SjS+CyPYKmeiKKwlSjBswwR4GlfyLEnsdU3b68dyBpqXTrht4Ag8c1Z016vrJeAKthS5j8KwWlFDBeAIe4C7c2b8/wM+GYyaWYC3a0LoNlz1aWvR91dro="
-    - secure: "R7LuJWzqGPH8+V07+DFSQfCScjpWjIAcLCGSM3lU6TyVvu9TWDA3FwKLs6c3nRO5mfFT7h5dz4eB5uOPByRBkZLKfUn/yhnvRFn9nCmFUdxZiyxJXon31DMjQyFIZWz95THKTOnn/VxXXEGAhbtGb+fsVeBsZ9XrcTIt+g1h2Ak="
+    # Make the log output cleaner
+    - TERM=dumb
+    # Super secure, encrypted variables! Ssssh!
+    - 
+    - 
