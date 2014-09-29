@@ -29,7 +29,7 @@ If you're using [Maven](http://maven.apache.org/download.html) to manage project
     <dependency>
         <groupId>com.lukespragg</groupId>
         <artifactId>jalopy</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
 If you do not already have the required repo in your repository list, you will need to add this as well:
