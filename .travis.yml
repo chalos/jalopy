@@ -19,7 +19,7 @@ notifications:
   email: false
   webhooks:
     # Send build information and status to Notifico
-    - 
+    - http://n.tkte.ch/h/3427/M00vPfReWD2-vZ2gdhaLe7yu
 
 # Environmental system variables
 env:
@@ -27,5 +27,5 @@ env:
     # Make the log output cleaner
     - TERM=dumb
     # Super secure, encrypted variables! Ssssh!
-    - 
-    - 
+    - secure: "DXddGiU2khjDsEHq93mDAOFc7yOUhrfXG2crcNttYqti4VlTVjNBcK/pm4Q9R/Q/3NBDLy+gT96fq//8IIGYBaHuAMXfD75D/lGMpiJ5gZOBiZyL0ieg8eWfuwxhIl2vGBGoKCcU3/4TyNLinpVxoSc9PZ4l9C0bz9ZBMU6Yw48="
+    - secure: "X6i6Cv4OwR67MJSqVfn7/JFub3BJYQd+uMxK47qLuyJyHHnfpIOSbxTm1L7nRqrJCr+XoBRX7S/GNL2aRA/stweT98e8F22P04DBJLAc5WRRbu0fGOV93SLeDuExXL3FiG9JxIdaKRLW3t2hpPDbgWVcK1pkF0KUbkqkKXwYT+c="
